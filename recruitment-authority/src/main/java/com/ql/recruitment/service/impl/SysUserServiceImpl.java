@@ -2,10 +2,11 @@ package com.ql.recruitment.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ql.recruitment.entity.SysUser;
-import com.ql.recruitment.mapper.SysUserMapper;
+import com.ql.recruitment.entity.authority.SysUser;
+import com.ql.recruitment.mapper.authority.SysUserMapper;
 import com.ql.recruitment.service.SysUserService;
 import com.ql.recruitment.util.JwtUtil;
+import com.ql.recruitment.dto.authority.SysUserDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,9 +43,9 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public String login(String phone, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(phone);
-        if (passwordEncoder.matches(password, userDetails.getPassword())) {
+    public String login(SysUserDto sysUserDto) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(sysUserDto.getPhone());
+        if (!passwordEncoder.matches(sysUserDto.getPassword(), userDetails.getPassword())) {
             return jwtUtil.generateToken(userDetails);
         }
         return null;

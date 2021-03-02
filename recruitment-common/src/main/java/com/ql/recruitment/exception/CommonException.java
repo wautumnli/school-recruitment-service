@@ -1,6 +1,5 @@
 package com.ql.recruitment.exception;
 
-import com.ql.recruitment.result.ResultEnum;
 import lombok.Data;
 
 /**

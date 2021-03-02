@@ -1,7 +1,7 @@
 package com.ql.recruitment.config;
 
-import com.ql.recruitment.entity.SysUser;
-import com.ql.recruitment.entity.SysUserDetails;
+import com.ql.recruitment.entity.authority.SysUser;
+import com.ql.recruitment.component.SysUserDetails;
 import com.ql.recruitment.filter.JwtFilter;
 import com.ql.recruitment.service.SysUserService;
 import org.springframework.context.annotation.Bean;
@@ -9,11 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +22,7 @@ import javax.annotation.Resource;
 /**
  * Author： wanqiuli
  * DateTime: 2021/3/1 14:30
+ * 权限安全设置
  */
 @Configuration
 @EnableWebSecurity

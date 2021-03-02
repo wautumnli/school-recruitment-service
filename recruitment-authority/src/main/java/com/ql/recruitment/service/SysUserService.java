@@ -1,6 +1,7 @@
 package com.ql.recruitment.service;
 
-import com.ql.recruitment.entity.SysUser;
+import com.ql.recruitment.entity.authority.SysUser;
+import com.ql.recruitment.dto.authority.SysUserDto;
 
 /**
  * Author： wanqiuli
@@ -10,5 +11,5 @@ public interface SysUserService {
 
     public SysUser getUserFromPhone(String phone);
 
-    public String login(String phone, String password);
+    public String login(SysUserDto sysUserDto);
 }

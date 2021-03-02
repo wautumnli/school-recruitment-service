@@ -1,5 +1,6 @@
-package com.ql.recruitment.entity;
+package com.ql.recruitment.component;
 
+import com.ql.recruitment.entity.authority.SysUser;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

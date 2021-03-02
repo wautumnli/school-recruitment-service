@@ -1,4 +1,4 @@
-package com.ql.recruitment.entity;
+package com.ql.recruitment.entity.authority;
 
 import lombok.Builder;
 import lombok.Data;

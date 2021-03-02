@@ -13,6 +13,7 @@
         <module>recruitment-common</module>
         <module>recruitment-authority</module>
         <module>recruitment-web</module>
+        <module>recruitment-dao</module>
     </modules>
 
     <properties>

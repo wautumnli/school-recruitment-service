@@ -1,7 +1,7 @@
-package com.ql.recruitment.mapper;
+package com.ql.recruitment.mapper.authority;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ql.recruitment.entity.SysUser;
+import com.ql.recruitment.entity.authority.SysUser;
 
 /**
  * Author： wanqiuli

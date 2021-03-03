@@ -10,6 +10,7 @@ import java.util.Collection;
 /**
  * Author： wanqiuli
  * DateTime: 2021/3/1 16:39
+ * SpringSecurity 用户登录信息
  */
 @Data
 public class SysUserDetails implements UserDetails {

@@ -9,6 +9,7 @@ import java.util.Map;
 /**
  * Author： wanqiuli
  * DateTime: 2021/2/22 15:10
+ * 通用返回结果
  */
 @Data
 @Accessors(chain = true)

@@ -1,5 +1,7 @@
 package com.ql.recruitment.config;
 
+import com.ql.recruitment.component.MyAccessDeniedHandler;
+import com.ql.recruitment.component.MyAuthenticationEntryPoint;
 import com.ql.recruitment.entity.authority.SysUser;
 import com.ql.recruitment.component.SysUserDetails;
 import com.ql.recruitment.filter.JwtFilter;
@@ -16,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import javax.annotation.Resource;
 
 /**
@@ -55,11 +56,24 @@ public class SecruityConfig extends WebSecurityConfigurerAdapter {
 
         http.headers().cacheControl();
         http.addFilterAfter(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.exceptionHandling()
+                .accessDeniedHandler(myAccessDeniedHandler())
+                .authenticationEntryPoint(myAuthenticationEntryPoint());
     }
 
     @Bean
     public JwtFilter jwtFilter() {
         return new JwtFilter();
+    }
+
+    @Bean
+    public MyAccessDeniedHandler myAccessDeniedHandler() {
+        return new MyAccessDeniedHandler();
+    }
+
+    @Bean
+    public MyAuthenticationEntryPoint myAuthenticationEntryPoint() {
+        return new MyAuthenticationEntryPoint();
     }
 
     @Bean

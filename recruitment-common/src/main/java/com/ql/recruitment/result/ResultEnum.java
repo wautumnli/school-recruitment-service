@@ -11,8 +11,8 @@ import lombok.Getter;
 public enum ResultEnum {
 
     SUCCESS(200, "操作成功"),
-    UNAUTHORIZED(401, "未授权"),
-    FORBIDDEN(403,"拒绝访问"),
+    UNAUTHORIZED(401, "未登录"),
+    FORBIDDEN(403,"您没有权限"),
     ERROR(404, "操作失败");
 
 

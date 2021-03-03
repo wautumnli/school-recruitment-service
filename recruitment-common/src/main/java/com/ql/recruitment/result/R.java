@@ -34,6 +34,20 @@ public class R {
         return r;
     }
 
+    public static R unAuthorized() {
+        R r = new R();
+        r.setCode(ResultEnum.UNAUTHORIZED.getCode());
+        r.setMessage(ResultEnum.UNAUTHORIZED.getMessage());
+        return r;
+    }
+
+    public static R forbidden() {
+        R r = new R();
+        r.setCode(ResultEnum.FORBIDDEN.getCode());
+        r.setMessage(ResultEnum.FORBIDDEN.getMessage());
+        return r;
+    }
+
     public R data(Map<String,Object> map) {
         this.setData(map);
         return this;

@@ -4,6 +4,7 @@ import com.ql.recruitment.component.MyAccessDeniedHandler;
 import com.ql.recruitment.component.MyAuthenticationEntryPoint;
 import com.ql.recruitment.entity.authority.SysUser;
 import com.ql.recruitment.component.SysUserDetails;
+import com.ql.recruitment.exception.AuthorityException;
 import com.ql.recruitment.filter.JwtFilter;
 import com.ql.recruitment.service.SysUserService;
 import org.springframework.context.annotation.Bean;
@@ -88,7 +89,7 @@ public class SecruityConfig extends WebSecurityConfigurerAdapter {
             if (sysUser != null) {
                 return new SysUserDetails(sysUser);
             }
-            return null;
+            throw new AuthorityException("账号密码不存在");
         };
     }
 }

@@ -1,12 +1,10 @@
 package com.ql.recruitment.exception;
 
-import lombok.Data;
 
 /**
  * Author： wanqiuli
  * DateTime: 2021/2/22 15:35
  */
-@Data
 public class CommonException extends RuntimeException {
 
     private Integer code;

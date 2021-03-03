@@ -1,6 +1,8 @@
 package com.ql.recruitment.entity.authority;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +19,7 @@ public class SysUser {
     /**
      * 用户唯一id
      */
-    @TableField("id")
+    @TableId(type = IdType.AUTO)
     private Long id;
     /**
      * 用户电话

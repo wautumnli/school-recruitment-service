@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ql.recruitment.mapper.master.RecruitMMapper">
+    <resultMap id="baseResult" type="com.ql.recruitment.entity.master.RecruitM" >
+        <id column="id" property="id" />
+        <result column="position" property="position" />
+        <result column="wages" property="wages"  />
+        <result column="work_place" property="workPlace"  />
+        <result column="education" property="education"  />
+        <result column="recruit_type" property="recruitType"  />
+        <result column="industry" property="industry" />
+        <result column="create_time" property="createTime" />
+        <result column="nick_name" property="userName" />
+        <association property="companyM" javaType="com.ql.recruitment.entity.master.CompanyM">
+            <id column="id" property="id"/>
+            <result column="img_url" property="imgUrl" />
+            <result column="company_name" property="companyName" />
+            <result column="company_type" property="companyType" />
+            <result column="company_status" property="companyStatus" />
+        </association>
+        <association property="recruitD" javaType="com.ql.recruitment.entity.master.RecruitD">
+            <id column="id" property="id"/>
+            <result column="content" property="content" />
+            <result column="email" property="email" />
+            <result column="p_id" property="pId" />
+        </association>
+    </resultMap>
+    <select id="getRecruitM" resultMap="baseResult" parameterType="com.ql.recruitment.dto.master.RecruitMDto">
+        SELECT
+            a.id,
+            a.position,
+            a.wages,
+            a.work_place,
+            a.education,
+            a.recruit_type,
+            b.company_name,
+            b.company_type,
+            b.company_status,
+            b.img_url
+        FROM recruit_m a
+        LEFT JOIN company_m b
+        ON a.company_id = b.id
+        WHERE a.industry = #{industry}
+        AND a.recruit_type = #{recruitType}
+        LIMIT 6
+    </select>
+
+    <select id="getRecruit" resultMap="baseResult" parameterType="com.ql.recruitment.dto.master.RecruitMDto">
+        SELECT
+            a.id,
+            a.position,
+            a.wages,
+            a.work_place,
+            a.education,
+            a.industry,
+            a.recruit_type,
+            a.create_time,
+            b.company_name,
+            b.company_type,
+            b.company_status,
+            b.img_url,
+            c.nick_name
+        FROM recruit_m a
+        LEFT JOIN company_m b
+        ON a.company_id = b.id
+        LEFT JOIN sys_user_m c
+        ON a.user_id = c.id
+        <where>
+            <if test="param2.recruitType!=null">
+                and a.recruit_type = #{param2.recruitType}
+            </if>
+            <if test="param2.industry != null and param2.industry != ''">
+                and a.industry = #{param2.industry}
+            </if>
+            <if test="param2.companyName != null and param2.companyName != ''">
+                and b.company_name like CONCAT('%', #{param2.companyName}, '%')
+            </if>
+            <if test="param2.position != null and param2.position != ''">
+                or a.position like CONCAT('%', #{param2.position}, '%')
+            </if>
+            <if test="param2.wages != null and param2.wages != ''">
+                and a.wages like CONCAT('%', #{param2.wages}, '%')
+            </if>
+            <if test="param2.userName != null and param2.userName != ''">
+                and c.nick_name = #{param2.userName}
+            </if>
+            <if test="param2.userId != null">
+                and a.user_id = #{param2.userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDetail" resultMap="baseResult" parameterType="com.ql.recruitment.dto.master.RecruitMDto">
+        SELECT
+        a.position,
+        a.wages,
+        a.work_place,
+        a.education,
+        a.industry,
+        b.company_name,
+        c.email,
+        c.content
+        FROM recruit_m a
+        LEFT JOIN company_m b
+        ON a.company_id = b.id
+        LEFT JOIN recruit_d c
+        ON a.id = c.p_id
+        WHERE a.id = #{id}
+    </select>
+</mapper>

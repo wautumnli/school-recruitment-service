@@ -51,9 +51,9 @@ public class SecruityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
         http.headers().cacheControl();
         http.addFilterAfter(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -84,8 +84,8 @@ public class SecruityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return phone -> {
-            SysUser sysUser = sysUserService.getUserFromPhone(phone);
+        return username -> {
+            SysUser sysUser = sysUserService.getUserFromUsername(username);
             if (sysUser != null) {
                 return new SysUserDetails(sysUser);
             }

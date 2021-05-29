@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * Author： wanqiuli
@@ -26,13 +27,14 @@ public class SysUserController {
     @PostMapping("/login")
     @ResponseBody
     public R login(@RequestBody SysUserDto sysUserDto) {
-        String token = sysUserService.login(sysUserDto);
-        return R.ok().setData(Collections.singletonMap("token", token));
+        Map<String, Object> result = sysUserService.login(sysUserDto);
+        return R.ok().setData(result);
     }
 
-    @GetMapping("/test")
+    @PostMapping("/apply")
     @ResponseBody
-    public R test() {
-        return R.ok();
+    public R apply(@RequestBody SysUserDto sysUserDto) {
+        return R.ok().setData(Collections.singletonMap("res", sysUserService.applyUser(sysUserDto)));
     }
+
 }

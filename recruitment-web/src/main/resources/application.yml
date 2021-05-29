@@ -1,14 +1,32 @@
 server:
-  port: 8081
+  port: 8082
+
+minio:
+  url: http://127.0.0.1
+  port: 9000
+  username: admin
+  password: password
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/recruitment?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: password
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 20MB
 
 authority:
   headName: Authorization
   tokenHead: Bearer
   secret: recruitment_secret
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ql.recruitment.entity.*

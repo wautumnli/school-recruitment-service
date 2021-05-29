@@ -33,7 +33,7 @@ public class SysUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return sysUser.getPhone();
+        return sysUser.getUsername();
     }
 
     @Override

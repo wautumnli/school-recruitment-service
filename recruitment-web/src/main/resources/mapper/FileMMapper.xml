@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ql.recruitment.mapper.file.FileMMapper">
+    <resultMap id="baseResult" type="com.ql.recruitment.entity.file.FileM" >
+        <id column="id" property="id" />
+        <result column="file_name" property="fileName"  />
+        <result column="file_size" property="fileSize"  />
+        <result column="file_type" property="fileType"  />
+        <result column="file_url" property="fileUrl"  />
+        <result column="create_time" property="createTime" />
+        <result column="nick_name" property="userName" />
+    </resultMap>
+
+    <select id="getFile" resultMap="baseResult" parameterType="com.ql.recruitment.dto.file.FileMDto">
+        SELECT
+        a.id,
+        a.file_name,
+        a.file_type,
+        a.file_size,
+        a.file_url,
+        a.create_time,
+        b.nick_name
+        FROM file_m a
+        LEFT JOIN sys_user_m b
+        ON a.publish_user = b.id
+        <where>
+            <if test="param2.userName!=null and param2.userName != ''">
+                and b.nick_name = #{param2.userName}
+            </if>
+            <if test="param2.fileName != null and param2.fileName != ''">
+                and a.file_Name like CONCAT('%', #{param2.fileName}, '%')
+            </if>
+            <if test="param2.userId != null">
+                and a.publish_user = #{param2.userId}
+            </if>
+        </where>
+    </select>
+</mapper>

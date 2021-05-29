@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ql.recruitment.mapper.master.UserInfoMapper">
+    <resultMap id="baseResult" type="com.ql.recruitment.entity.master.UserInfo" >
+        <id column="id" property="id" />
+        <result column="birthday" property="birthday"  />
+        <result column="sex" property="sex"  />
+        <result column="user_id" property="userId"  />
+        <result column="grade" property="grade"  />
+        <result column="college" property="college" />
+        <result column="class" property="className" />
+        <association property="sysUser" javaType="com.ql.recruitment.entity.authority.SysUser">
+            <id column="userId" property="id"/>
+            <result column="username" property="username" />
+            <result column="password" property="password" />
+            <result column="user_type" property="userType" />
+            <result column="nick_name" property="nickName" />
+        </association>
+    </resultMap>
+
+    <select id="getUserInfoD" resultMap="baseResult" parameterType="com.ql.recruitment.dto.master.UserInfoDto">
+        SELECT
+        a.id,
+        a.birthday,
+        a.sex,
+        a.user_id,
+        a.grade,
+        a.college,
+        a.class,
+        b.username,
+        b.nick_name,
+        b.user_type
+        FROM user_info_d a
+        LEFT JOIN sys_user_m b
+        ON a.user_id = b.id
+        <where>
+            <if test="userId != null">
+                and a.user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserInfo" resultMap="baseResult" parameterType="com.ql.recruitment.dto.master.UserInfoDto">
+        SELECT
+            a.id,
+            a.birthday,
+            a.sex,
+            a.user_id,
+            a.grade,
+            a.college,
+            a.class,
+            b.id as userId,
+            b.username,
+            b.nick_name,
+            b.user_type
+        FROM user_info_d a
+        LEFT JOIN sys_user_m b
+        ON a.user_id = b.id
+        <where>
+            <if test="param2.username != null and param2.username != ''">
+                and b.username = #{param2.username}
+            </if>
+            <if test="param2.userNickName != null and param2.userNickName != ''">
+                and b.nick_name = #{param2.userNickName}
+            </if>
+            <if test="param2.grade != null and param2.grade != ''">
+                and a.grade = #{param2.grade}
+            </if>
+            <if test="param2.className != null and param2.className != ''">
+                and a.class like CONCAT('%', #{param2.className}, '%')
+            </if>
+            <if test="param2.college != null and param2.college != ''">
+                or a.college like CONCAT('%', #{param2.college}, '%')
+            </if>
+            <if test="param2.userType != null">
+                and b.user_type = ${param2.userType}
+            </if>
+        </where>
+    </select>
+</mapper>

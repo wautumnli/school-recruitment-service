@@ -23,6 +23,21 @@
             <artifactId>recruitment-authority</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.ql</groupId>
+            <artifactId>recruitment-master</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ql</groupId>
+            <artifactId>recruitment-interview</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ql</groupId>
+            <artifactId>recruitment-file</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

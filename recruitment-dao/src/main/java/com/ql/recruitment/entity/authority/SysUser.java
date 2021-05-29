@@ -6,14 +6,16 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
+ * 用户主档信息
  * Author： wanqiuli
  * DateTime: 2021/3/1 15:44
  */
 @Data
-@Builder
-@TableName("sys_user")
+@Accessors(chain = true)
+@TableName("sys_user_m")
 public class SysUser {
 
     /**
@@ -22,10 +24,10 @@ public class SysUser {
     @TableId(type = IdType.AUTO)
     private Long id;
     /**
-     * 用户电话
+     * 账号
      */
-    @TableField("phone")
-    private String phone;
+    @TableField("username")
+    private String username;
     /**
      * 用户密码
      */
@@ -36,4 +38,9 @@ public class SysUser {
      */
     @TableField("nick_name")
     private String nickName;
+    /**
+     * 账户类型(0普通，1招聘，2管理)
+     */
+    @TableField("user_type")
+    private Integer userType;
 }

@@ -8,7 +8,6 @@ import lombok.Data;
  */
 @Data
 public class SysUserDto {
-
     /**
      * 用户唯一id
      */
@@ -16,7 +15,7 @@ public class SysUserDto {
     /**
      * 用户电话
      */
-    private String phone;
+    private String username;
     /**
      * 用户密码
      */
@@ -25,4 +24,9 @@ public class SysUserDto {
      * 用户昵称
      */
     private String nickName;
+    /**
+     * 用户类型
+     */
+    private Integer userType;
+    private Integer loginType;
 }
